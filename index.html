@@ -181,9 +181,7 @@
             font-family: 'UnifrakturMaguntia', cursive; /* The gothic font */
             font-size: 22pt;
             line-height: 1.4;
-        }
-
-        /* --- PRINT SETTINGS --- */
+        }        /* --- PRINT SETTINGS --- */
         @media print {
             body {
                 background: white;
@@ -208,6 +206,57 @@
             @page {
                 size: A4;
                 margin: 0;
+            }
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                gap: 1rem;
+            }
+            .preview-area {
+                padding: 1rem;
+            }
+            #paper {
+                width: 100%;
+                height: auto;
+                padding: 20mm 15mm;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            .uni-header {
+                font-size: 28pt;
+                margin-bottom: 15px;
+            }
+            .logo {
+                width: 80px;
+                margin: 15px 0;
+            }
+            .assignment-no {
+                font-size: 16pt;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            .section-block {
+                margin-bottom: 25px;
+            }
+            .label-text {
+                font-size: 12pt;
+            }
+            .info-text {
+                font-size: 12pt;
+            }
+            .sub-text {
+                font-size: 11pt;
+            }
+            .footer {
+                font-size: 18pt;
             }
         }
     </style>
