@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT DU Cover Page Generator</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-bg: #f3f4f6;
+            --paper-width: 210mm;
+            --paper-height: 297mm;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- LEFT SIDE: INPUT FORM --- */
+        .sidebar {
+            width: 350px;
+            background: white;
+            padding: 2rem;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        .sidebar h2 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #004d40;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.1);
+        }        button {
+            background-color: #004d40; /* DU Green-ish */
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 77, 64, 0.2);
+        }
+
+        button:hover {
+            background-color: #00695c;
+            box-shadow: 0 4px 12px rgba(0, 77, 64, 0.3);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 77, 64, 0.2);
+        }
+
+        /* --- RIGHT SIDE: PREVIEW AREA --- */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            padding: 2rem;
+        }        /* --- THE A4 PAPER (The Cover Page) --- */
+        #paper {
+            width: var(--paper-width);
+            height: var(--paper-height);
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            padding: 25mm 20mm; /* Top/Bottom: 25mm, Left/Right: 20mm */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            flex-wrap: nowrap;
+        }
+
+        /* --- TYPOGRAPHY & DESIGN --- */
+        
+        .uni-header {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36pt;
+            text-transform: uppercase;
+            color: black;
+            margin: 0;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin: 20px 0;
+        }        .assignment-no {
+            font-size: 18pt;
+            margin-top: 30px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .assignment-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22pt;
+            font-weight: 700;
+            margin-bottom: 50px;
+            line-height: 1.3;
+            max-width: 90%;
+            color: #1a1a1a;
+        }
+
+        .section-block {
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .label-text {
+            font-size: 14pt;
+            font-weight: 700; /* Bold label */
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-text {
+            font-size: 14pt;
+            display: block;
+            font-weight: 500;
+        }
+
+        .sub-text {
+            font-size: 12pt;
+            display: block;
+            color: #000;
+        }
+
+        /* Footer Style - Gothic Font */
+        .footer {
+            margin-top: auto; /* Pushes to bottom */
+            font-family: 'UnifrakturMaguntia', cursive; /* The gothic font */
+            font-size: 22pt;
+            line-height: 1.4;
+        }
+
+        /* --- PRINT SETTINGS --- */
+        @media print {
+            body {
+                background: white;
+                height: auto;
+                overflow: visible;
+                display: block;
+            }
+            .sidebar {
+                display: none; /* Hide form when printing */
+            }
+            .preview-area {
+                padding: 0;
+                display: block;
+            }
+            #paper {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                page-break-after: always;
+            }
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div>
+            <h2>IIT Cover Page Generator</h2>
+            <p style="font-size: 0.85rem; color: #666;">Enter details below to generate your cover page for <strong>Theory of Computing</strong>.</p>
+        </div>        <div class="form-group">
+            <label>Assignment Number</label>
+            <input type="text" id="in-assign-no" value="01" oninput="updateDetails()">
+        </div>
+
+        <div class="form-group">
+            <label>Student Name</label>
+            <input type="text" id="in-name" placeholder="Your Name" oninput="updateDetails()">
+        </div>
+
+        <div class="form-group">
+            <label>Roll Number</label>
+            <input type="text" id="in-roll" placeholder="e.g. 1613" oninput="updateDetails()">
+        </div>
+
+        <div class="form-group">
+            <label>Submission Date</label>
+            <input type="date" id="in-date" oninput="updateDetails()">
+        </div>
+
+        <button onclick="window.print()">Download / Print PDF</button>
+    </div>
+
+    <div class="preview-area">        <div id="paper">
+            <div class="uni-header">University Of Dhaka</div>
+
+            <img src="du.png" alt="DU Logo" class="logo">            <div class="assignment-no">Assignment - <span id="out-assign-no">01</span></div>
+
+            <div class="section-block">
+                <span class="label-text">Course Title: Theory of Computing</span>
+                <span class="label-text">Course Code: 2112</span>
+            </div>
+
+            <div class="section-block">
+                <span class="label-text">Prepared For:</span>
+                <span class="info-text" style="font-size: 16pt; margin-top: 5px;">Dr. Naushin Nower</span>
+                <span class="sub-text">Associate Professor</span>
+                <span class="sub-text">Institute of Information Technology, University Of Dhaka</span>
+            </div>
+
+            <div class="section-block" style="margin-top: 40px;">
+                <span class="label-text">Prepared By:</span>
+                <span class="info-text" style="font-size: 16pt; margin-top: 5px;" id="out-name">[Name]</span>
+                <span class="sub-text">Roll : <span id="out-roll">[Roll]</span></span>
+            </div>
+
+            <div class="section-block" style="margin-top: 20px;">
+                <span class="sub-text" style="font-weight: bold;">Submission Date: <span id="out-date">...</span></span>
+            </div>
+
+            <div class="footer">
+                Institute Information Technology (IIT)<br>
+                University Of Dhaka
+            </div>
+        </div>
+    </div>
+
+    <script>        function updateDetails() {
+            // Get values from inputs
+            const assignNo = document.getElementById('in-assign-no').value;
+            const name = document.getElementById('in-name').value;
+            const roll = document.getElementById('in-roll').value;
+            const rawDate = document.getElementById('in-date').value;
+
+            // Update output elements
+            document.getElementById('out-assign-no').innerText = assignNo ? assignNo : "01";
+            document.getElementById('out-name').innerText = name ? name : "[Name]";
+            document.getElementById('out-roll').innerText = roll ? roll : "[Roll]";
+
+            // Format Date (to appear like "20 October, 2025")
+            if (rawDate) {
+                const dateObj = new Date(rawDate);
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                document.getElementById('out-date').innerText = dateObj.toLocaleDateString('en-GB', options);
+            } else {
+                document.getElementById('out-date').innerText = "...";
+            }
+        }
+
+        // Set today's date automatically on load
+        document.getElementById('in-date').valueAsDate = new Date();
+        updateDetails();
+    </script>
+</body>
+</html>
