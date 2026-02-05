@@ -349,71 +349,147 @@
                 size: A4;
                 margin: 0;
             }
-        }/* --- MOBILE RESPONSIVE --- */
+        }        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
-            body {
-                gap: 0.75rem;
-                padding: 0.75rem;
-            }
             .sidebar {
-                width: 320px;
-                padding: 1.5rem;
-                gap: 1.2rem;
-            }
-            #paper {
-                scale: 0.75;
-                width: 210mm;
-                height: 300mm;
+                max-width: 450px;
             }
         }
 
         @media (max-width: 768px) {
             body {
-                flex-direction: column;
-                height: auto;
-                gap: 0.5rem;
-                padding: 0.5rem;
+                min-height: auto;
+                padding: 0.75rem;
             }
             .sidebar {
                 width: 100%;
-                padding: 1.25rem;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                gap: 0.8rem;
-                max-height: 45vh;
+                max-width: 100%;
+                padding: 1.75rem;
+                gap: 1.3rem;
+                border-radius: 12px;
             }
             .sidebar h2 {
-                font-size: 1.4rem;
-                margin-bottom: 0.3rem;
+                font-size: 1.6rem;
+                margin-bottom: 0.4rem;
             }
             .sidebar > div:first-child p {
-                font-size: 0.75rem;
-                margin-top: 0.3rem;
+                font-size: 0.8rem;
+                line-height: 1.6;
             }
             .form-group {
                 gap: 0.5rem;
             }
             label {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                letter-spacing: 0.6px;
+                margin-bottom: 0.15rem;
             }
             input {
-                padding: 0.8rem 0.9rem;
-                font-size: 0.95rem;
+                padding: 0.85rem 1rem;
+                font-size: 0.9rem;
+                border-radius: 8px;
             }
             button {
-                padding: 0.95rem;
-                font-size: 0.9rem;
-                margin-top: 0.5rem;
+                padding: 1rem;
+                font-size: 0.85rem;
+                border-radius: 8px;
+                gap: 0.5rem;
             }
-            .preview-area {
-                padding: 0.75rem;
-                height: 55vh;
-                align-items: center;
+            .modal-content {
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+            .modal-close {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
             }
             #paper {
-                scale: 0.55;
                 width: 210mm;
                 height: 300mm;
                 padding: 18mm 16mm;
+            }
+            .uni-header {
+                font-size: 32pt;
+                margin-bottom: 25px;
+            }
+            .logo {
+                width: 100px;
+                margin: 15px 0 35px 0;
+            }
+            .assignment-no {
+                font-size: 20pt;
+                margin-bottom: 25px;
+            }
+            .section-block {
+                margin-bottom: 40px;
+            }
+            .label-text {
+                font-size: 13pt;
+                margin-bottom: 6px;
+            }
+            .info-text {
+                font-size: 15pt;
+                margin: 5px 0;
+            }
+            .sub-text {
+                font-size: 12pt;
+                margin: 3px 0;
+            }
+            .footer {
+                font-size: 15pt;
+                padding-top: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+            .sidebar {
+                padding: 1.5rem;
+                gap: 1rem;
+                border-radius: 12px;
+            }
+            .sidebar h2 {
+                font-size: 1.4rem;
+            }
+            .sidebar > div:first-child p {
+                font-size: 0.75rem;
+            }
+            .form-group {
+                gap: 0.4rem;
+            }
+            label {
+                font-size: 0.7rem;
+                letter-spacing: 0.5px;
+            }
+            input {
+                padding: 0.8rem 0.9rem;
+                font-size: 0.85rem;
+                border-radius: 8px;
+            }
+            button {
+                padding: 0.9rem 0.8rem;
+                font-size: 0.8rem;
+                border-radius: 8px;
+            }
+            .modal {
+                padding: 0.5rem;
+            }
+            .modal-content {
+                padding: 1.2rem;
+                gap: 1.2rem;
+                border-radius: 12px;
+            }
+            .modal-close {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.8rem;
+                border-radius: 6px;
+            }
+            #paper {
+                width: 210mm;
+                height: 300mm;
+                padding: 16mm 14mm;
             }
             .uni-header {
                 font-size: 28pt;
@@ -421,102 +497,28 @@
             }
             .logo {
                 width: 90px;
-                margin: 15px 0 30px 0;
+                margin: 12px 0 30px 0;
             }
             .assignment-no {
                 font-size: 18pt;
-                margin-top: 8px;
                 margin-bottom: 20px;
             }
             .section-block {
-                margin-bottom: 35px;
+                margin-bottom: 30px;
             }
             .label-text {
-                font-size: 12pt;
-                margin-bottom: 6px;
+                font-size: 11pt;
+                margin-bottom: 5px;
             }
             .info-text {
-                font-size: 14pt;
-                margin: 5px 0;
+                font-size: 13pt;
             }
             .sub-text {
                 font-size: 11pt;
-                margin: 3px 0;
             }
             .footer {
-                font-size: 14pt;
-                padding-top: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                gap: 0.3rem;
-                padding: 0.3rem;
-            }
-            .sidebar {
-                width: 100%;
-                padding: 1rem;
-                max-height: 40vh;
-            }
-            .sidebar h2 {
-                font-size: 1.2rem;
-                margin-bottom: 0.2rem;
-            }
-            .sidebar > div:first-child p {
-                font-size: 0.7rem;
-            }
-            .form-group {
-                gap: 0.4rem;
-            }
-            label {
-                font-size: 0.75rem;
-                letter-spacing: 0.4px;
-            }
-            input {
-                padding: 0.7rem 0.8rem;
-                font-size: 0.9rem;
-                border-radius: 6px;
-            }
-            button {
-                padding: 0.85rem;
-                font-size: 0.85rem;
-            }
-            .preview-area {
-                padding: 0.5rem;
-                height: 60vh;
-            }
-            #paper {
-                scale: 0.45;
-                padding: 16mm 14mm;
-            }
-            .uni-header {
-                font-size: 24pt;
-                margin-bottom: 15px;
-            }
-            .logo {
-                width: 75px;
-                margin: 10px 0 20px 0;
-            }
-            .assignment-no {
-                font-size: 16pt;
-                margin-bottom: 15px;
-            }
-            .section-block {
-                margin-bottom: 25px;
-            }
-            .label-text {
-                font-size: 10pt;
-                margin-bottom: 4px;
-            }
-            .info-text {
-                font-size: 12pt;
-            }
-            .sub-text {
-                font-size: 10pt;
-            }
-            .footer {
-                font-size: 12pt;
+                font-size: 13pt;
+                padding-top: 10px;
             }
         }
     </style>
