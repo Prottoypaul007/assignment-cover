@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IIT DU Cover Page Generator</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <style>
         :root {
             --primary-color: #004d40;
             --primary-dark: #00352a;
@@ -24,7 +26,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }        body {
+        }
+
+        body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
@@ -32,7 +36,9 @@
             justify-content: center;
             align-items: center;
             padding: 1rem;
-        }        /* --- LEFT SIDE: INPUT FORM --- */
+        }
+
+        /* --- LEFT SIDE: INPUT FORM --- */
         .sidebar {
             width: 100%;
             max-width: 500px;
@@ -64,7 +70,9 @@
             line-height: 1.8;
             margin-top: 0.5rem;
             font-size: 0.9rem;
-        }        .form-group {
+        }
+
+        .form-group {
             display: flex;
             flex-direction: column;
             gap: 0.7rem;
@@ -72,14 +80,8 @@
         }
 
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         label {
@@ -103,9 +105,7 @@
             color: var(--text-dark);
         }
 
-        input::placeholder {
-            color: var(--text-light);
-        }
+        input::placeholder { color: var(--text-light); }
 
         input:focus {
             outline: none;
@@ -113,7 +113,9 @@
             background-color: var(--bg-white);
             box-shadow: 0 0 0 5px rgba(0, 77, 64, 0.08);
             transform: translateY(-2px);
-        }        .button-group {
+        }
+
+        .button-group {
             display: flex;
             gap: 1rem;
             margin-top: auto;
@@ -166,9 +168,9 @@
             padding: 1rem;
         }
 
-        .modal.active {
-            display: flex;
-        }        .modal-content {
+        .modal.active { display: flex; }
+
+        .modal-content {
             background: white;
             border-radius: 16px;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
@@ -183,14 +185,8 @@
         }
 
         @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-close {
@@ -212,7 +208,9 @@
         .modal-close:hover {
             background: #ff5252;
             transform: scale(1.05);
-        }        /* --- THE A4 PAPER (The Cover Page) --- */
+        }
+
+        /* --- THE A4 PAPER (The Cover Page) --- */
         #paper {
             width: 210mm;
             height: 297mm;
@@ -230,9 +228,9 @@
             flex-shrink: 0;
         }
 
-        .modal #paper {
-            box-shadow: none;
-        }        .uni-header {
+        .modal #paper { box-shadow: none; }
+
+        .uni-header {
             font-family: 'Oswald', sans-serif;
             font-size: 27pt;
             text-transform: uppercase;
@@ -241,7 +239,9 @@
             letter-spacing: 1px;
             margin-bottom: 8px;
             font-weight: 700;
-            line-height: 1.0;
+            /* FIX 2: Increased line-height to prevent clipping of tops of letters */
+            line-height: 1.2;
+            padding-top: 5px;
         }
 
         .logo {
@@ -284,10 +284,11 @@
             letter-spacing: 0.1px;
         }
 
+        /* This uses font-weight 600 which we added in FIX 1 */
         .info-text {
             font-size: 11pt;
             display: block;
-            font-weight: 600;
+            font-weight: 600; 
             color: #000000;
             margin: 0.5px 0;
             line-height: 1.1;
@@ -311,36 +312,39 @@
             font-size: 11pt;
             line-height: 1.0;
             color: #000000;
-        }/* --- PRINT SETTINGS --- */
+        }
+
+        /* --- PRINT SETTINGS (FIX 3) --- */
         @media print {
-            * {
-                margin: 0;
-                padding: 0;
+            * { margin: 0; padding: 0; }
+            html, body { 
+                width: 100%; 
+                height: 100%; 
+                margin: 0; 
+                padding: 0; 
+                background: white; 
             }
-            html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                background: white;
-                display: block;
-                min-height: 100%;
+            
+            body { 
+                /* Ensures background colors/gradients print if user has that setting on, 
+                   though we usually want white for the paper */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact; 
+                display: block; 
                 overflow: visible;
             }
-            .sidebar {
-                display: none !important;
-            }
+
+            .sidebar, .modal-close { display: none !important; }
+
             .modal {
                 position: static;
                 background: none;
                 padding: 0 !important;
                 display: block;
-                margin: 0;
                 width: 100%;
                 height: 100%;
             }
+
             .modal-content {
                 background: none;
                 border-radius: 0;
@@ -348,210 +352,100 @@
                 padding: 0 !important;
                 margin: 0;
                 max-height: none;
-                gap: 0;
-                display: flex;
-                flex-direction: column;
+                display: block; 
             }
-            .modal-close {
-                display: none !important;
-            }
+
             #paper {
                 box-shadow: none;
                 margin: 0 !important;
-                padding: 8mm 10mm !important;
+                padding: 12mm 14mm !important; /* Kept original padding */
                 width: 210mm !important;
-                height: 297mm !important;
-                page-break-after: always;
+                
+                /* Slight reduction to prevent blank pages */
+                height: 296mm !important; 
+                
+                page-break-after: avoid; /* Prevent extra blank page */
                 border-radius: 0;
                 overflow: hidden !important;
+                position: relative; /* Needed for footer absolute positioning */
             }
+
+            /* Anchor footer to bottom to ensure it doesn't float up */
+            .footer {
+                position: absolute;
+                bottom: 12mm;
+                left: 0;
+                width: 100%;
+                border-top: 1px solid #000; /* Make divider clearer in print */
+            }
+
             @page {
                 size: A4;
                 margin: 0 !important;
                 padding: 0 !important;
             }
-        }/* --- MOBILE RESPONSIVE --- */
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .sidebar {
-                max-width: 450px;
-            }
+            .sidebar { max-width: 450px; }
         }
 
         @media (max-width: 768px) {
-            body {
-                min-height: auto;
-                padding: 0.75rem;
-            }
-            .sidebar {
-                width: 100%;
-                max-width: 100%;
-                padding: 1.75rem;
-                gap: 1.3rem;
-                border-radius: 12px;
-            }
-            .sidebar h2 {
-                font-size: 1.6rem;
-                margin-bottom: 0.4rem;
-            }
-            .sidebar > div:first-child p {
-                font-size: 0.8rem;
-                line-height: 1.6;
-            }
-            .form-group {
-                gap: 0.5rem;
-            }
-            label {
-                font-size: 0.75rem;
-                letter-spacing: 0.6px;
-                margin-bottom: 0.15rem;
-            }
-            input {
-                padding: 0.85rem 1rem;
-                font-size: 0.9rem;
-                border-radius: 8px;
-            }
-            button {
-                padding: 1rem;
-                font-size: 0.85rem;
-                border-radius: 8px;
-                gap: 0.5rem;
-            }
-            .modal-content {
-                padding: 1.5rem;
-                gap: 1.5rem;
-            }
-            .modal-close {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
-            }
-            #paper {
-                width: 210mm;
-                height: 300mm;
-                padding: 18mm 16mm;
-            }
-            .uni-header {
-                font-size: 32pt;
-                margin-bottom: 25px;
-            }
-            .logo {
-                width: 100px;
-                margin: 15px 0 35px 0;
-            }
-            .assignment-no {
-                font-size: 20pt;
-                margin-bottom: 25px;
-            }
-            .section-block {
-                margin-bottom: 40px;
-            }
-            .label-text {
-                font-size: 13pt;
-                margin-bottom: 6px;
-            }
-            .info-text {
-                font-size: 15pt;
-                margin: 5px 0;
-            }
-            .sub-text {
-                font-size: 12pt;
-                margin: 3px 0;
-            }
-            .footer {
-                font-size: 15pt;
-                padding-top: 12px;
-            }
+            body { min-height: auto; padding: 0.75rem; }
+            .sidebar { width: 100%; max-width: 100%; padding: 1.75rem; gap: 1.3rem; border-radius: 12px; }
+            .sidebar h2 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+            .sidebar > div:first-child p { font-size: 0.8rem; line-height: 1.6; }
+            .form-group { gap: 0.5rem; }
+            label { font-size: 0.75rem; letter-spacing: 0.6px; margin-bottom: 0.15rem; }
+            input { padding: 0.85rem 1rem; font-size: 0.9rem; border-radius: 8px; }
+            button { padding: 1rem; font-size: 0.85rem; border-radius: 8px; gap: 0.5rem; }
+            .modal-content { padding: 1.5rem; gap: 1.5rem; }
+            .modal-close { padding: 0.6rem 1rem; font-size: 0.85rem; }
+            #paper { width: 210mm; height: 300mm; padding: 18mm 16mm; }
+            .uni-header { font-size: 32pt; margin-bottom: 25px; }
+            .logo { width: 100px; margin: 15px 0 35px 0; }
+            .assignment-no { font-size: 20pt; margin-bottom: 25px; }
+            .section-block { margin-bottom: 40px; }
+            .label-text { font-size: 13pt; margin-bottom: 6px; }
+            .info-text { font-size: 15pt; margin: 5px 0; }
+            .sub-text { font-size: 12pt; margin: 3px 0; }
+            .footer { font-size: 15pt; padding-top: 12px; }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 0.5rem;
-            }
-            .sidebar {
-                padding: 1.5rem;
-                gap: 1rem;
-                border-radius: 12px;
-            }
-            .sidebar h2 {
-                font-size: 1.4rem;
-            }
-            .sidebar > div:first-child p {
-                font-size: 0.75rem;
-            }
-            .form-group {
-                gap: 0.4rem;
-            }
-            label {
-                font-size: 0.7rem;
-                letter-spacing: 0.5px;
-            }
-            input {
-                padding: 0.8rem 0.9rem;
-                font-size: 0.85rem;
-                border-radius: 8px;
-            }
-            button {
-                padding: 0.9rem 0.8rem;
-                font-size: 0.8rem;
-                border-radius: 8px;
-            }
-            .modal {
-                padding: 0.5rem;
-            }
-            .modal-content {
-                padding: 1.2rem;
-                gap: 1.2rem;
-                border-radius: 12px;
-            }
-            .modal-close {
-                padding: 0.5rem 0.9rem;
-                font-size: 0.8rem;
-                border-radius: 6px;
-            }
-            #paper {
-                width: 210mm;
-                height: 300mm;
-                padding: 16mm 14mm;
-            }
-            .uni-header {
-                font-size: 28pt;
-                margin-bottom: 20px;
-            }
-            .logo {
-                width: 90px;
-                margin: 12px 0 30px 0;
-            }
-            .assignment-no {
-                font-size: 18pt;
-                margin-bottom: 20px;
-            }
-            .section-block {
-                margin-bottom: 30px;
-            }
-            .label-text {
-                font-size: 11pt;
-                margin-bottom: 5px;
-            }
-            .info-text {
-                font-size: 13pt;
-            }
-            .sub-text {
-                font-size: 11pt;
-            }
-            .footer {
-                font-size: 13pt;
-                padding-top: 10px;
-            }
+            body { padding: 0.5rem; }
+            .sidebar { padding: 1.5rem; gap: 1rem; border-radius: 12px; }
+            .sidebar h2 { font-size: 1.4rem; }
+            .sidebar > div:first-child p { font-size: 0.75rem; }
+            .form-group { gap: 0.4rem; }
+            label { font-size: 0.7rem; letter-spacing: 0.5px; }
+            input { padding: 0.8rem 0.9rem; font-size: 0.85rem; border-radius: 8px; }
+            button { padding: 0.9rem 0.8rem; font-size: 0.8rem; border-radius: 8px; }
+            .modal { padding: 0.5rem; }
+            .modal-content { padding: 1.2rem; gap: 1.2rem; border-radius: 12px; }
+            .modal-close { padding: 0.5rem 0.9rem; font-size: 0.8rem; border-radius: 6px; }
+            #paper { width: 210mm; height: 300mm; padding: 16mm 14mm; }
+            .uni-header { font-size: 28pt; margin-bottom: 20px; }
+            .logo { width: 90px; margin: 12px 0 30px 0; }
+            .assignment-no { font-size: 18pt; margin-bottom: 20px; }
+            .section-block { margin-bottom: 30px; }
+            .label-text { font-size: 11pt; margin-bottom: 5px; }
+            .info-text { font-size: 13pt; }
+            .sub-text { font-size: 11pt; }
+            .footer { font-size: 13pt; padding-top: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">        <div>
+    <div class="sidebar">
+        <div>
             <h2>IIT Cover Page Generator</h2>
             <p style="font-size: 0.85rem; color: #666;">Enter details below to generate your cover page for <strong>Assignments</strong>.</p>
-        </div>        <div style="height: 1px; background: linear-gradient(to right, transparent, var(--border-color), transparent);"></div>
+        </div>
+        <div style="height: 1px; background: linear-gradient(to right, transparent, var(--border-color), transparent);"></div>
 
-        <!-- Course Information Section -->
         <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: -1.2rem;">📚 Course Information</div>
 
         <div class="form-group">
@@ -569,7 +463,6 @@
             <input type="text" id="in-assign-no" value="01" oninput="updateDetails()">
         </div>
 
-        <!-- Instructor Information Section -->
         <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: -1.2rem; margin-top: 0.5rem;">👨‍🏫 Instructor Information</div>
 
         <div class="form-group">
@@ -582,7 +475,6 @@
             <input type="text" id="in-instr-desig" value="Associate Professor" oninput="updateDetails()">
         </div>
 
-        <!-- Student Information Section -->
         <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: -1.2rem; margin-top: 0.5rem;">👤 Student Information</div>
 
         <div class="form-group">
@@ -598,48 +490,57 @@
         <div class="form-group">
             <label>Submission Date</label>
             <input type="date" id="in-date" oninput="updateDetails()">
-        </div>        <div class="button-group">
+        </div>
+
+        <div class="button-group">
             <button onclick="previewCoverPage()">👁️ Preview</button>
             <button onclick="downloadPDF()">📥 Download PDF</button>
         </div>
     </div>
 
-    <!-- Preview Modal -->
     <div id="previewModal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeCoverPage()">✕ Close</button>
+            
             <div id="paper">
-            <div class="uni-header">University Of Dhaka</div>
+                <div class="uni-header">University Of Dhaka</div>
 
-            <img src="du.png" alt="DU Logo" class="logo">            <div class="assignment-no">Assignment - <span id="out-assign-no">01</span></div>            <div class="section-block">
-                <span class="label-text">Course Title: <span id="out-course-title">Theory of Computing</span></span>
-                <span class="label-text">Course Code: <span id="out-course-code">2112</span></span>
+                <img src="du.png" alt="DU Logo" class="logo">
+
+                <div class="assignment-no">Assignment - <span id="out-assign-no">01</span></div>
+
+                <div class="section-block">
+                    <span class="label-text">Course Title: <span id="out-course-title">Theory of Computing</span></span>
+                    <span class="label-text">Course Code: <span id="out-course-code">2112</span></span>
+                </div>
+
+                <div class="section-block">
+                    <span class="label-text">Prepared For:</span>
+                    <span class="info-text" id="out-instr-name">Dr. Naushin Nower</span>
+                    <span class="sub-text" id="out-instr-desig">Associate Professor</span>
+                    <span class="sub-text">Institute of Information Technology, University Of Dhaka</span>
+                </div>
+
+                <div class="section-block">
+                    <span class="label-text">Prepared By:</span>
+                    <span class="info-text" id="out-name">[Name]</span>
+                    <span class="sub-text">Roll : <span id="out-roll">[Roll]</span></span>
+                </div>
+
+                <div class="section-block">
+                    <span class="sub-text" style="font-weight: bold;">Submission Date: <span id="out-date">...</span></span>
+                </div>
+
+                <div class="footer">
+                    Institute of Information Technology (IIT)<br>
+                    University Of Dhaka
+                </div>
             </div>
-
-            <div class="section-block">
-                <span class="label-text">Prepared For:</span>
-                <span class="info-text" id="out-instr-name">Dr. Naushin Nower</span>
-                <span class="sub-text" id="out-instr-desig">Associate Professor</span>
-                <span class="sub-text">Institute of Information Technology, University Of Dhaka</span>
             </div>
-
-            <div class="section-block">
-                <span class="label-text">Prepared By:</span>
-                <span class="info-text" id="out-name">[Name]</span>
-                <span class="sub-text">Roll : <span id="out-roll">[Roll]</span></span>
-            </div>
-
-            <div class="section-block">
-                <span class="sub-text" style="font-weight: bold;">Submission Date: <span id="out-date">...</span></span>
-            </div>
-
-            <div class="footer">
-                Institute of Information Technology (IIT)<br>
-                University Of Dhaka            </div>
-        </div>
     </div>
 
-    <script>function updateDetails() {
+    <script>
+        function updateDetails() {
             // Get values from inputs
             const courseTitle = document.getElementById('in-course-title').value;
             const courseCode = document.getElementById('in-course-code').value;
@@ -659,7 +560,7 @@
             document.getElementById('out-name').innerText = name ? name : "[Name]";
             document.getElementById('out-roll').innerText = roll ? roll : "[Roll]";
 
-            // Format Date (to appear like "20 October, 2025")
+            // Format Date
             if (rawDate) {
                 const dateObj = new Date(rawDate);
                 const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -675,17 +576,24 @@
 
         function previewCoverPage() {
             document.getElementById('previewModal').classList.add('active');
-        }        function closeCoverPage() {
+        }
+
+        function closeCoverPage() {
             document.getElementById('previewModal').classList.remove('active');
         }
 
-        function downloadPDF() {
-            // Open preview modal first
+        // FIX 4: Smart Download PDF function
+        async function downloadPDF() {
+            // 1. Open the preview modal so the element is visible
             previewCoverPage();
-            // Wait a moment for modal to render, then print
-            setTimeout(function() {
+
+            // 2. Wait for fonts to fully load (Fixes the wrong font/text issue)
+            await document.fonts.ready;
+
+            // 3. Small buffer to ensure layout paints before print dialog
+            setTimeout(() => {
                 window.print();
-            }, 100);
+            }, 500);
         }
 
         // Close modal when clicking outside
