@@ -232,32 +232,30 @@
 
         .modal #paper {
             box-shadow: none;
-        }
-
-        .uni-header {
+        }        .uni-header {
             font-family: 'Oswald', sans-serif;
-            font-size: 30pt;
+            font-size: 27pt;
             text-transform: uppercase;
             color: #000000;
             margin: 0;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
             font-weight: 700;
-            line-height: 1.05;
+            line-height: 1.0;
         }
 
         .logo {
-            width: 90px;
+            width: 85px;
             height: auto;
-            margin: 6px 0 14px 0;
+            margin: 4px 0 10px 0;
         }
 
         .assignment-no {
-            font-size: 16pt;
-            margin-top: 4px;
-            margin-bottom: 14px;
+            font-size: 14pt;
+            margin-top: 2px;
+            margin-bottom: 12px;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             color: #000000;
         }
 
@@ -272,46 +270,46 @@
         }
 
         .section-block {
-            margin-bottom: 22px;
-            line-height: 1.25;
+            margin-bottom: 18px;
+            line-height: 1.2;
             width: 100%;
         }
 
         .label-text {
-            font-size: 10.5pt;
+            font-size: 9.5pt;
             font-weight: 700;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             color: #000000;
-            letter-spacing: 0.2px;
+            letter-spacing: 0.1px;
         }
 
         .info-text {
-            font-size: 12pt;
+            font-size: 11pt;
             display: block;
             font-weight: 600;
             color: #000000;
-            margin: 1px 0;
-            line-height: 1.15;
+            margin: 0.5px 0;
+            line-height: 1.1;
         }
 
         .sub-text {
-            font-size: 10pt;
+            font-size: 9pt;
             display: block;
             color: #000000;
-            margin: 0.5px 0;
+            margin: 0px 0;
             font-weight: 400;
-            line-height: 1.15;
+            line-height: 1.1;
         }
 
         /* Footer Style - Gothic Font */
         .footer {
             margin-top: auto;
-            padding-top: 6px;
+            padding-top: 4px;
             border-top: 1px solid #ddd;
             font-family: 'UnifrakturMaguntia', cursive;
-            font-size: 12pt;
-            line-height: 1.05;
+            font-size: 11pt;
+            line-height: 1.0;
             color: #000000;
         }/* --- PRINT SETTINGS --- */
         @media print {
@@ -337,7 +335,7 @@
             .modal {
                 position: static;
                 background: none;
-                padding: 0;
+                padding: 0 !important;
                 display: block;
                 margin: 0;
                 width: 100%;
@@ -347,7 +345,7 @@
                 background: none;
                 border-radius: 0;
                 box-shadow: none;
-                padding: 0;
+                padding: 0 !important;
                 margin: 0;
                 max-height: none;
                 gap: 0;
@@ -359,17 +357,18 @@
             }
             #paper {
                 box-shadow: none;
-                margin: 0;
-                padding: 0;
-                width: 210mm;
-                height: 297mm;
+                margin: 0 !important;
+                padding: 8mm 10mm !important;
+                width: 210mm !important;
+                height: 297mm !important;
                 page-break-after: always;
                 border-radius: 0;
+                overflow: hidden !important;
             }
             @page {
                 size: A4;
-                margin: 0;
-                padding: 0;
+                margin: 0 !important;
+                padding: 0 !important;
             }
         }/* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
