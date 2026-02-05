@@ -27,110 +27,194 @@
         }        body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: row;
-            overflow: hidden;
-            gap: 1rem;
+            justify-content: center;
+            align-items: center;
             padding: 1rem;
-        }
-
-        /* --- LEFT SIDE: INPUT FORM --- */
+        }        /* --- LEFT SIDE: INPUT FORM --- */
         .sidebar {
-            width: 380px;
+            width: 100%;
+            max-width: 500px;
             background: var(--bg-white);
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.8rem;
             z-index: 10;
-            border-radius: 12px;
+            border-radius: 16px;
         }
 
         .sidebar h2 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .sidebar > div:first-child p {
             color: var(--text-light);
-            line-height: 1.6;
+            line-height: 1.8;
             margin-top: 0.5rem;
-        }
-
-        .form-group {
+            font-size: 0.9rem;
+        }        .form-group {
             display: flex;
             flex-direction: column;
             gap: 0.7rem;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         label {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-dark);
             text-transform: uppercase;
-            letter-spacing: 0.7px;
+            letter-spacing: 0.8px;
             display: block;
+            margin-bottom: 0.2rem;
         }
 
         input {
-            padding: 0.95rem 1rem;
+            padding: 1rem 1.1rem;
             border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
             background-color: var(--bg-light);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+        }
+
+        input::placeholder {
+            color: var(--text-light);
         }
 
         input:focus {
             outline: none;
             border-color: var(--primary-color);
             background-color: var(--bg-white);
-            box-shadow: 0 0 0 4px rgba(0, 77, 64, 0.1);
+            box-shadow: 0 0 0 5px rgba(0, 77, 64, 0.08);
             transform: translateY(-2px);
+        }        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+            width: 100%;
         }
 
         button {
+            flex: 1;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
-            padding: 1.1rem;
+            padding: 1.2rem;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            margin-top: auto;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 15px rgba(0, 77, 64, 0.2);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
 
         button:hover {
             background: linear-gradient(135deg, var(--primary-light), #00695c);
-            box-shadow: 0 6px 20px rgba(0, 77, 64, 0.35);
-            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 77, 64, 0.35);
+            transform: translateY(-4px);
         }
 
         button:active {
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(0, 77, 64, 0.2);
-        }        /* --- RIGHT SIDE: PREVIEW AREA --- */
-        .preview-area {
-            flex: 1;
-            display: flex;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
             justify-content: center;
-            align-items: flex-start;
-            overflow: auto;
-            padding: 1.5rem;
-            background: rgba(0,0,0,0.1);
-        }        /* --- THE A4 PAPER (The Cover Page) --- */
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }        .modal-content {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            padding: 2.5rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-close {
+            align-self: flex-end;
+            background: #ff6b6b;
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            flex: none;
+            width: auto;
+            margin: 0;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .modal-close:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        /* --- THE A4 PAPER (The Cover Page) --- */
         #paper {
             width: 210mm;
             height: 300mm;
@@ -146,7 +230,11 @@
             overflow: visible;
             border-radius: 4px;
             flex-shrink: 0;
-        }        .uni-header {
+        }
+
+        .modal #paper {
+            box-shadow: none;
+        }.uni-header {
             font-family: 'Oswald', sans-serif;
             font-size: 36pt;
             text-transform: uppercase;
@@ -222,7 +310,7 @@
             font-size: 16pt;
             line-height: 1.3;
             color: #000000;
-        }/* --- PRINT SETTINGS --- */
+        }        /* --- PRINT SETTINGS --- */
         @media print {
             body {
                 background: white;
@@ -233,9 +321,22 @@
             .sidebar {
                 display: none; /* Hide form when printing */
             }
-            .preview-area {
+            .modal {
+                position: static;
+                background: none;
                 padding: 0;
                 display: block;
+            }
+            .modal-content {
+                background: none;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0;
+                max-height: none;
+                gap: 0;
+            }
+            .modal-close {
+                display: none;
             }
             #paper {
                 box-shadow: none;
@@ -248,7 +349,7 @@
                 size: A4;
                 margin: 0;
             }
-        }        /* --- MOBILE RESPONSIVE --- */
+        }/* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
             body {
                 gap: 0.75rem;
@@ -422,11 +523,13 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <div>
+    <div class="sidebar">        <div>
             <h2>IIT Cover Page Generator</h2>
             <p style="font-size: 0.85rem; color: #666;">Enter details below to generate your cover page for <strong>Assignments</strong>.</p>
-        </div>
+        </div>        <div style="height: 1px; background: linear-gradient(to right, transparent, var(--border-color), transparent);"></div>
+
+        <!-- Course Information Section -->
+        <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: -1.2rem;">📚 Course Information</div>
 
         <div class="form-group">
             <label>Course Title</label>
@@ -443,6 +546,9 @@
             <input type="text" id="in-assign-no" value="01" oninput="updateDetails()">
         </div>
 
+        <!-- Instructor Information Section -->
+        <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: -1.2rem; margin-top: 0.5rem;">👨‍🏫 Instructor Information</div>
+
         <div class="form-group">
             <label>Instructor Name</label>
             <input type="text" id="in-instr-name" value="Dr. Naushin Nower" oninput="updateDetails()">
@@ -452,6 +558,9 @@
             <label>Instructor Designation</label>
             <input type="text" id="in-instr-desig" value="Associate Professor" oninput="updateDetails()">
         </div>
+
+        <!-- Student Information Section -->
+        <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: -1.2rem; margin-top: 0.5rem;">👤 Student Information</div>
 
         <div class="form-group">
             <label>Student Name</label>
@@ -466,12 +575,17 @@
         <div class="form-group">
             <label>Submission Date</label>
             <input type="date" id="in-date" oninput="updateDetails()">
+        </div><div class="button-group">
+            <button onclick="previewCoverPage()">👁️ Preview</button>
+            <button onclick="window.print()">📥 Download PDF</button>
         </div>
-
-        <button onclick="window.print()">Download / Print PDF</button>
     </div>
 
-    <div class="preview-area">        <div id="paper">
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCoverPage()">✕ Close</button>
+            <div id="paper">
             <div class="uni-header">University Of Dhaka</div>
 
             <img src="du.png" alt="DU Logo" class="logo">            <div class="assignment-no">Assignment - <span id="out-assign-no">01</span></div>            <div class="section-block">
@@ -498,12 +612,11 @@
 
             <div class="footer">
                 Institute of Information Technology (IIT)<br>
-                University Of Dhaka
-            </div>
+                University Of Dhaka            </div>
         </div>
     </div>
 
-    <script>        function updateDetails() {
+    <script>function updateDetails() {
             // Get values from inputs
             const courseTitle = document.getElementById('in-course-title').value;
             const courseCode = document.getElementById('in-course-code').value;
@@ -536,6 +649,22 @@
         // Set today's date automatically on load
         document.getElementById('in-date').valueAsDate = new Date();
         updateDetails();
+
+        function previewCoverPage() {
+            document.getElementById('previewModal').classList.add('active');
+        }
+
+        function closeCoverPage() {
+            document.getElementById('previewModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target === modal) {
+                closeCoverPage();
+            }
+        });
     </script>
 </body>
 </html>
