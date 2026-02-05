@@ -312,44 +312,63 @@
             color: #000000;
         }        /* --- PRINT SETTINGS --- */
         @media print {
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
             body {
                 background: white;
-                height: auto;
-                overflow: visible;
                 display: block;
+                min-height: 100%;
+                overflow: visible;
             }
             .sidebar {
-                display: none; /* Hide form when printing */
+                display: none !important;
             }
             .modal {
                 position: static;
                 background: none;
                 padding: 0;
                 display: block;
+                margin: 0;
+                width: 100%;
+                height: 100%;
             }
             .modal-content {
                 background: none;
                 border-radius: 0;
                 box-shadow: none;
                 padding: 0;
+                margin: 0;
                 max-height: none;
                 gap: 0;
+                display: flex;
+                flex-direction: column;
             }
             .modal-close {
-                display: none;
+                display: none !important;
             }
             #paper {
                 box-shadow: none;
                 margin: 0;
-                width: 100%;
-                height: 100%;
+                padding: 0;
+                width: 210mm;
+                height: 297mm;
                 page-break-after: always;
+                border-radius: 0;
             }
             @page {
                 size: A4;
                 margin: 0;
+                padding: 0;
             }
-        }        /* --- MOBILE RESPONSIVE --- */
+        }/* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
             .sidebar {
                 max-width: 450px;
@@ -577,9 +596,9 @@
         <div class="form-group">
             <label>Submission Date</label>
             <input type="date" id="in-date" oninput="updateDetails()">
-        </div><div class="button-group">
+        </div>        <div class="button-group">
             <button onclick="previewCoverPage()">👁️ Preview</button>
-            <button onclick="window.print()">📥 Download PDF</button>
+            <button onclick="downloadPDF()">📥 Download PDF</button>
         </div>
     </div>
 
@@ -654,10 +673,17 @@
 
         function previewCoverPage() {
             document.getElementById('previewModal').classList.add('active');
+        }        function closeCoverPage() {
+            document.getElementById('previewModal').classList.remove('active');
         }
 
-        function closeCoverPage() {
-            document.getElementById('previewModal').classList.remove('active');
+        function downloadPDF() {
+            // Open preview modal first
+            previewCoverPage();
+            // Wait a moment for modal to render, then print
+            setTimeout(function() {
+                window.print();
+            }, 100);
         }
 
         // Close modal when clicking outside
