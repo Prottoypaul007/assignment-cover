@@ -212,51 +212,52 @@
         .modal-close:hover {
             background: #ff5252;
             transform: scale(1.05);
-        }
-
-        /* --- THE A4 PAPER (The Cover Page) --- */
+        }        /* --- THE A4 PAPER (The Cover Page) --- */
         #paper {
             width: 210mm;
-            height: 300mm;
+            height: 297mm;
             background: white;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            padding: 20mm 18mm;
+            padding: 12mm 14mm;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             border-radius: 4px;
             flex-shrink: 0;
         }
 
         .modal #paper {
             box-shadow: none;
-        }.uni-header {
+        }
+
+        .uni-header {
             font-family: 'Oswald', sans-serif;
-            font-size: 36pt;
+            font-size: 30pt;
             text-transform: uppercase;
             color: #000000;
             margin: 0;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
             font-weight: 700;
+            line-height: 1.05;
         }
 
         .logo {
-            width: 110px;
+            width: 90px;
             height: auto;
-            margin: 20px 0 40px 0;
+            margin: 6px 0 14px 0;
         }
 
         .assignment-no {
-            font-size: 22pt;
-            margin-top: 10px;
-            margin-bottom: 30px;
+            font-size: 16pt;
+            margin-top: 4px;
+            margin-bottom: 14px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             color: #000000;
         }
 
@@ -271,46 +272,48 @@
         }
 
         .section-block {
-            margin-bottom: 50px;
-            line-height: 1.5;
+            margin-bottom: 22px;
+            line-height: 1.25;
             width: 100%;
         }
 
         .label-text {
-            font-size: 14pt;
+            font-size: 10.5pt;
             font-weight: 700;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 2px;
             color: #000000;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
 
         .info-text {
-            font-size: 16pt;
+            font-size: 12pt;
             display: block;
             font-weight: 600;
             color: #000000;
-            margin: 6px 0;
+            margin: 1px 0;
+            line-height: 1.15;
         }
 
         .sub-text {
-            font-size: 13pt;
+            font-size: 10pt;
             display: block;
             color: #000000;
-            margin: 4px 0;
+            margin: 0.5px 0;
             font-weight: 400;
+            line-height: 1.15;
         }
 
         /* Footer Style - Gothic Font */
         .footer {
             margin-top: auto;
-            padding-top: 15px;
+            padding-top: 6px;
             border-top: 1px solid #ddd;
             font-family: 'UnifrakturMaguntia', cursive;
-            font-size: 16pt;
-            line-height: 1.3;
+            font-size: 12pt;
+            line-height: 1.05;
             color: #000000;
-        }        /* --- PRINT SETTINGS --- */
+        }/* --- PRINT SETTINGS --- */
         @media print {
             * {
                 margin: 0;
